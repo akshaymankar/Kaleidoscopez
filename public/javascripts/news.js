@@ -39,9 +39,7 @@ function setupSlides(response) {
     }
 
     function prepareDate(item) {
-        var date = $('<div>');
-        date.append(moment(item["date"]).fromNow());
-        date.addClass("date");
+        var date = '';
         return date;
     }
 

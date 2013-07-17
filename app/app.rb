@@ -2,6 +2,7 @@ require 'sinatra'
 require './app/boot'
 require 'sass'
 require 'erb'
+require './app/models/command_line'
 
 class App < Sinatra::Base
 
@@ -53,6 +54,11 @@ class App < Sinatra::Base
     redirect "/#{params[:name]}/edit"
   end
 
+  post '/item/:source_name' do |source_name|
+    puts params.inspect
+    CommandLine.where(:name => source_name).first.import_from_web(params[:text])
+  end
+
   post '/:channel_name/:source_id' do |channel_name, source_id|
     Channel.where(:name => channel_name).to_a[0].sources << Source.where(:id => source_id).to_a[0]
     nil
@@ -80,6 +86,10 @@ class App < Sinatra::Base
       Item.where(:source => source).collect {|item| item.attributes.merge("source" => item.source.name)}
     end.flatten
     {:items => items.shuffle}.to_json
+  end
+
+  put '/source/:type/:name' do |type, name|
+    type.constantize.create(:name => name, :image_url => params[:image_url])
   end
 
 end
