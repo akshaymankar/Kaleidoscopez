@@ -55,8 +55,12 @@ class App < Sinatra::Base
   end
 
   post '/item/:source_name' do |source_name|
-    puts params.inspect
     CommandLine.where(:name => source_name).first.import_from_web(params[:text])
+  end
+
+  delete '/item/:source_name' do |source_name|
+    Item.where(:source => CommandLine.where(:name => source_name).first).delete
+    nil
   end
 
   post '/:channel_name/:source_id' do |channel_name, source_id|
@@ -88,8 +92,8 @@ class App < Sinatra::Base
     {:items => items.shuffle}.to_json
   end
 
-  put '/source/:type/:name' do |type, name|
-    type.constantize.create(:name => name, :image_url => params[:image_url])
+  put '/source/:name' do |name|
+    CommandLine.create(:name => name, :image_url => params[:image_url])
   end
 
 end
