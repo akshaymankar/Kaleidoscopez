@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kaleidoscopez</title>
+        <link href="/stylesheets/lib/bootstrap.min.css" rel="stylesheet"/>
+        <link type="text/css" rel="stylesheet" media="screen" href="stylesheets/dashboard.css">
+        <link href="/stylesheets/home.css" rel="stylesheet"/>
+        <script src="/javascripts/lib/jquery.min.js"></script>
+        <script src="/javascripts/lib/bootstrap.min.js"></script>
+    </head>
+    <body>
+
+        <div class="about-slide">
+            <div class="main-container row">
+                    <div class="new-channel span5">
+                        <fieldset>
+                            <p>What do you want to call your news feed?</p>
+                            <form action="/channel/new" method="post">
+                                <input type="text" name="name" required />
+                                <input type="submit" class="btn" value="Submit">
+                            </form>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

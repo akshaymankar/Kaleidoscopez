@@ -9,8 +9,11 @@ class App < Sinatra::Base
   set :public_folder, "#{dir}/../public"
 
   get '/' do
-    @channels = Channel.all.to_a
-    erb :home
+    redirect "/preview"
+  end
+
+  get '/create_channel' do
+    erb :create_channel
   end
 
   get '/about' do
